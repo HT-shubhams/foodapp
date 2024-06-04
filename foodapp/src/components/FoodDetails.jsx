@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./fooddetails.module.css";
+import ItemList from "./ItemList";
 export default function FoodDetails({ foodId }) {
   const URL = `https://api.spoonacular.com/recipes/${foodId}/information`;
   const API_KEY = "7458d7728c0a468d8c3e9b2007b7d067";
@@ -55,6 +56,9 @@ export default function FoodDetails({ foodId }) {
             <div>
               <span> 💲 {food.pricePerServing / 100} Per Serving</span>
             </div>
+
+            <h2>Ingrediants</h2>
+            <ItemList food={food} />
 
             <h2>Instructions</h2>
             <div className={styles.receipeInstructions}>
