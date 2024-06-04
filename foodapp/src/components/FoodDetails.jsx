@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import styles from "./fooddetails.module.css";
 export default function FoodDetails({ foodId }) {
   const URL = `https://api.spoonacular.com/recipes/${foodId}/information`;
   const API_KEY = "7458d7728c0a468d8c3e9b2007b7d067";
@@ -29,10 +29,14 @@ export default function FoodDetails({ foodId }) {
     <div>
       {food ? (
         <div>
-          <div>
-            <h1>{food.title}</h1>
-            <img src={food.image} alt="Image is not available." />
-            <div>
+          <div className={styles.receipeCard}>
+            <h1 className={styles.receipeName}>{food.title}</h1>
+            <img
+              className={styles.receipeImage}
+              src={food.image}
+              alt="Image is not available."
+            />
+            <div className={styles.receipeDetails}>
               <span>
                 <strong> ⏰ {food.readyInMinutes} Minutes</strong>
               </span>
@@ -40,19 +44,26 @@ export default function FoodDetails({ foodId }) {
                 <strong> 👪 Serves : {food.servings}</strong>
               </span>
               <span>
-                {food.vegetarian ? " 🥕 Vegetarian" : " 🍖 Non-Vegetarian"}
+                <strong>
+                  {food.vegetarian ? " 🥕 Vegetarian" : " 🍖 Non-Vegetarian"}
+                </strong>
               </span>
-              <span>{food.vegan ? " 🐄 Vegan" : ""}</span>
+              <span>
+                <span>{food.vegan ? " 🐄 Vegan" : ""}</span>
+              </span>
             </div>
             <div>
               <span> 💲 {food.pricePerServing / 100} Per Serving</span>
             </div>
-          </div>
-          <div>
+
             <h2>Instructions</h2>
-            {food.analyzedInstructions[0].steps.map((step) => (
-              <li>{step.step}</li>
-            ))}
+            <div className={styles.receipeInstructions}>
+              <ol>
+                {food.analyzedInstructions[0].steps.map((step) => (
+                  <li>{step.step}</li>
+                ))}
+              </ol>
+            </div>
           </div>
         </div>
       ) : (
